@@ -1,0 +1,106 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <div class="container">
+    <h1>Experience</h1>
+    
+    <div class="experience-item">
+      <h2>Junior Consultant</h2>
+      <div class="company-details">
+        <span class="company">Royal Enfield</span>
+        <span class="duration">August 2024 - Present</span>
+        <span class="location">Chennai, RE HeadQuarters</span>
+      </div>
+      <ul>
+        <li>Designed and optimized Power BI dashboards by transforming Excel-based reports into real-time, cloud-integrated solutions with SQL views and daily data streaming.</li>
+        <li>Developed advanced DAX calculations, RLS, and 25+ key business metrics, covering cost adherence, time tracking, service efficiency, and soft product performance.</li>
+        <li>Reengineered and automated multiple service dashboards, enhancing decision-making, operational insights, and reporting accuracy.</li>
+        <li>Collaborated closely with business teams to understand requirements, streamlining analytics, data automation, and performance optimization across service operations.</li>
+      </ul>
+    </div>
+
+    <div class="experience-item">
+      <h2>Data Steward Intern</h2>
+      <div class="company-details">
+        <span class="company">Customerinsights.ai</span>
+        <span class="duration">April 2024 - June 2024</span>
+        <span class="location">Hyderabad</span>
+      </div>
+      <ul>
+        <li>Led a high-impact hospital clustering project, refining affiliations and naming conventions with fuzzy matching and custom Python scripts, achieving 99.99% accuracy.</li>
+        <li>Automated complex processes using Python, SQL, and Excel, while applying meticulous manual validation to ensure data integrity and eliminate inconsistencies.</li>
+        <li>Collaborated with Novartis stakeholders, aligning data structures with industry standards and delivering high-quality, business-critical insights.</li>
+      </ul>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .experience-item {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    background: transparent;
+  }
+
+  .experience-item:hover {
+    border-color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  h2 {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .experience-item:hover h2 {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .company-details {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    transition: all 0.3s ease;
+  }
+
+  .experience-item:hover .company-details {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  ul {
+    list-style-type: disc;
+    padding-left: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 600px) {
+    .company-details {
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+  }
+</style>
