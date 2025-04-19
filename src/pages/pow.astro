@@ -4,7 +4,7 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout>
   <div class="container">
-    <h1>Experience</h1>
+    <h1>POW</h1>
     
     <div class="experience-item">
       <h2>Junior Consultant</h2>
@@ -39,37 +39,36 @@ import Layout from '../layouts/Layout.astro';
 
 <style>
   .container {
-    max-width: 800px;
-    margin: 0 auto;
+    margin: 2rem auto;
+    padding: 0 1rem;
   }
 
   h1 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    margin: 0 0 3rem 0;
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    max-width: 15ch;
   }
 
   .experience-item {
     margin-bottom: 3rem;
-    padding: 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
-    background: transparent;
-  }
-
-  .experience-item:hover {
-    border-color: rgba(255, 255, 255, 0.9);
-    transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.05);
   }
 
   h2 {
+    font-size: clamp(1.4rem, 3.5vw, 1.7rem);
     color: rgba(255, 255, 255, 0.9);
-    font-size: 1.8rem;
-    margin-bottom: 0.5rem;
-    transition: all 0.3s ease;
+    margin-bottom: 0.75rem;
+    position: relative;
+    padding-left: 1.2em;
+    line-height: 1.4;
   }
 
-  .experience-item:hover h2 {
+  h2::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0.1em;
     color: rgba(255, 255, 255, 0.9);
   }
 
@@ -78,29 +77,50 @@ import Layout from '../layouts/Layout.astro';
     gap: 1rem;
     flex-wrap: wrap;
     margin-bottom: 1rem;
-    color: rgba(255, 255, 255, 0.6);
-    transition: all 0.3s ease;
-  }
-
-  .experience-item:hover .company-details {
-    color: rgba(255, 255, 255, 0.9);
+    margin-left: 1.2em;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
   }
 
   ul {
     list-style-type: disc;
-    padding-left: 1.2rem;
-    color: rgba(255, 255, 255, 0.8);
+    padding-left: 2.5em;
+    margin-top: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
   }
 
   li {
-    margin-bottom: 0.5rem;
-    line-height: 1.6;
+    margin-bottom: 0.6rem;
+    line-height: 1.5;
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.9);
   }
 
   @media (max-width: 600px) {
     .company-details {
       flex-direction: column;
       gap: 0.3rem;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 1.4rem;
+        padding-left: 1.1em;
+    }
+     h2::before {
+        top: 0.05em;
+     }
+    ul {
+      padding-left: 2em;
+      margin-top: 1rem;
+    }
+    li {
+       font-size: 1rem;
+    }
+    .company-details,
+    ul {
+      margin-left: 1.1em;
     }
   }
 </style>

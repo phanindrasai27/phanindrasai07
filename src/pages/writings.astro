@@ -1,121 +1,82 @@
 ---
 import Layout from '../layouts/Layout.astro';
+
+// Add the writings constant back
+const writings = [
+  { title: "Building Products That Make People Addicted to Your Magic and Journey with Your Product", url: "https://medium.com/@phanindra_sai27/building-products-that-make-people-addicted-to-your-magic-and-journey-with-your-product-afc115610bfb" },
+  { title: "Designing YouTube for Senior Citizens: A Case Study", url: "https://medium.com/@phanindra_sai27/designing-youtube-for-senior-citizens-a-case-study-40550823d1ac" },
+  { title: "How Eatsure is Surviving in the Cutthroat Food Delivery Market with its Own Playbook", url: "https://medium.com/@phanindra_sai27/how-eatsure-is-surviving-in-the-cutthroat-food-delivery-market-with-its-own-playbook-f7507e431901" },
+  { title: "Living Forever: The Bryan Johnson Experiment", url: "https://medium.com/@phanindra_sai27/living-forever-the-bryan-johnson-experiment-7c68c87d64a7" },
+  { title: "Not All Startups Are Created Equal: The Brutal Truth About What it Takes to Make an Impact", url: "https://medium.com/@phanindra_sai27/not-all-startups-are-created-equal-the-brutal-truth-about-what-it-takes-to-make-an-impact-cc316125a39c" },
+  { title: "Notifications are Dead for Future Product Design: Notify App - A Case Study", url: "https://medium.com/@phanindra_sai27/notifications-are-dead-for-future-product-design-notify-app-a-case-study-fa66ab6f9c6d" },
+  { title: "Product Improvement Case Study on Rapido", url: "https://medium.com/@phanindra_sai27/product-improvement-case-study-on-rapido-b92aa827c4c6" },
+  { title: "The Choice Paradox in the Middle Class: A Trap of Endless Exploration", url: "https://medium.com/@phanindra_sai27/the-choice-paradox-in-the-middle-class-a-trap-of-endless-exploration-54f6dd46be75" },
+  { title: "The Impact of System Design, Tech Stack and Tools on Workplace Productivity", url: "https://medium.com/@phanindra_sai27/the-impact-of-system-design-tech-stack-and-tools-on-workplace-productivity-98711db2524d" },
+  { title: "When Life Feels Overwhelming: Letting Go of the Mental Weight", url: "https://medium.com/@phanindra_sai27/when-life-feels-overwhelming-letting-go-of-the-mental-weight-11f15e01204f" }
+];
 ---
 
 <Layout>
   <div class="container">
     <h1>Writings</h1>
     
-    <div class="articles">
-      <article class="article-card">
-        <h2>Building Products That Make People Addicted to Your Magic and Journey with Your Product</h2>
-        <a href="https://medium.com/@phanindra_sai27/building-products-that-make-people-addicted-to-your-magic-and-journey-with-your-product-afc115610bfb" class="read-link">READ →</a>
-      </article>
-
-      <article class="article-card">
-        <h2>Designing YouTube for Senior Citizens: A Case Study</h2>
-        <a href="https://medium.com/@phanindra_sai27/designing-youtube-for-senior-citizens-a-case-study-40550823d1ac" class="read-link">READ →</a>
-      </article>
-
-      <article class="article-card">
-        <h2>How Eatsure is Surviving in the Cutthroat Food Delivery Market with its Own Playbook</h2>
-        <a href="https://medium.com/@phanindra_sai27/how-eatsure-is-surviving-in-the-cutthroat-food-delivery-market-with-its-own-playbook-f7507e431901" class="read-link">READ →</a>
-      </article>
-
-      <article class="article-card">
-        <h2>Living Forever: The Bryan Johnson Experiment</h2>
-        <a href="https://medium.com/@phanindra_sai27/living-forever-the-bryan-johnson-experiment-7c68c87d64a7" class="read-link">READ →</a>
-      </article>
-
-      <article class="article-card">
-        <h2>Not All Startups Are Created Equal: The Brutal Truth About What it Takes to Make an Impact</h2>
-        <a href="https://medium.com/@phanindra_sai27/not-all-startups-are-created-equal-the-brutal-truth-about-what-it-takes-to-make-an-impact-cc316125a39c" class="read-link">READ →</a>
-      </article>
-
-      <article class="article-card">
-        <h2>Notifications are Dead for Future Product Design: Notify App - A Case Study</h2>
-        <a href="https://medium.com/@phanindra_sai27/notifications-are-dead-for-future-product-design-notify-app-a-case-study-fa66ab6f9c6d" class="read-link">READ →</a>
-      </article>
-
-      <article class="article-card">
-        <h2>Product Improvement Case Study on Rapido</h2>
-        <a href="https://medium.com/@phanindra_sai27/product-improvement-case-study-on-rapido-b92aa827c4c6" class="read-link">READ →</a>
-      </article>
-
-      <article class="article-card">
-        <h2>The Choice Paradox in the Middle Class: A Trap of Endless Exploration</h2>
-        <a href="https://medium.com/@phanindra_sai27/the-choice-paradox-in-the-middle-class-a-trap-of-endless-exploration-54f6dd46be75" class="read-link">READ →</a>
-      </article>
-
-      <article class="article-card">
-        <h2>The Impact of System Design, Tech Stack and Tools on Workplace Productivity</h2>
-        <a href="https://medium.com/@phanindra_sai27/the-impact-of-system-design-tech-stack-and-tools-on-workplace-productivity-98711db2524d" class="read-link">READ →</a>
-      </article>
-
-      <article class="article-card">
-        <h2>When Life Feels Overwhelming: Letting Go of the Mental Weight</h2>
-        <a href="https://medium.com/@phanindra_sai27/when-life-feels-overwhelming-letting-go-of-the-mental-weight-11f15e01204f" class="read-link">READ →</a>
-      </article>
+    <div class="links">
+      {writings.map((writing, index) => (
+        <a href={writing.url}>{writing.title}</a>
+      ))}
     </div>
   </div>
 </Layout>
 
 <style>
   .container {
-    max-width: 800px;
-    margin: 0 auto;
+    /* Removed margin: 0 auto; */
+    /* Ensure no other conflicting container styles */
   }
 
   h1 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
+    font-size: clamp(2.5rem, 8vw, 4rem); /* Match other h1s */
+    margin: 0 0 3rem 0; /* Match pow.astro h1 margin */
+    line-height: 1.1;
+    letter-spacing: -0.04em;
+    max-width: 15ch;
   }
 
-  .articles {
-    display: grid;
-    gap: 2rem;
+  .links {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1rem, 2vh, 1.5rem);
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    margin-top: clamp(1rem, 3vh, 2rem);
   }
 
-  .article-card {
-    padding: 2rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
-    background: transparent;
-  }
-
-  .article-card:hover {
-    border-color: rgba(255, 255, 255, 0.9);
-    transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  article h2 {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.5rem;
-    margin: 0 0 1rem 0;
-    letter-spacing: -0.02em;
-    line-height: 1.3;
-    transition: all 0.3s ease;
-  }
-
-  .article-card:hover h2 {
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  .read-link {
-    font-weight: 700;
-    font-size: 0.9rem;
+  .links a {
     color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
     transition: all 0.3s ease;
+    transform-origin: 0 50%;
+    position: relative;
+    padding-left: 1.2em;
   }
 
-  .read-link:hover {
+  .links a::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
     color: rgba(255, 255, 255, 0.9);
   }
 
-  @media (max-width: 600px) {
-    .article-card {
-      padding: 1.5rem;
-    }
+  .links a:hover {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .links a:hover::before {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .links a:active {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
   }
 </style>
