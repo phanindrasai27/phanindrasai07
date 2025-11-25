@@ -1,0 +1,94 @@
+---
+interface Props {
+  title: string;
+  company: string;
+  duration: string;
+  location: string;
+  description: string[];
+}
+
+const { title, company, duration, location, description } = Astro.props;
+---
+
+<div class="project-card">
+  <div class="header">
+    <h3>{title}</h3>
+    <div class="meta">
+      <span class="company">{company}</span>
+      <span class="separator">/</span>
+      <span class="duration">{duration}</span>
+      <span class="separator">/</span>
+      <span class="location">{location}</span>
+    </div>
+  </div>
+  
+  <ul class="description">
+    {description.map((item) => (
+      <li>{item}</li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .project-card {
+    padding: 0;
+    margin-bottom: 3rem;
+  }
+
+  .header {
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 0 0.25rem 0;
+    color: var(--text-primary);
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    align-items: center;
+  }
+
+  .company {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .separator {
+    color: var(--text-muted);
+    opacity: 0.6;
+  }
+
+  .duration,
+  .location {
+    color: var(--text-secondary);
+  }
+
+  .description {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+  }
+
+  .description li {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+
+  .description li::marker {
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 600px) {
+    .meta {
+      gap: 0.25rem;
+    }
+  }
+</style>

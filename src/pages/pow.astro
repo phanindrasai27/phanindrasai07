@@ -1,150 +1,67 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const projects = [
+  {
+    title: "Associate Consultant",
+    company: "Royal Enfield",
+    duration: "August 2024 - Present",
+    location: "Chennai, RE HeadQuarters",
+    description: [
+      "Built multiple Power BI dashboards for soft product sales, retention, and callback tracking using more than 25 key metrics across macro and micro levels. These dashboards are used across India to monitor performance, spot bottlenecks, handle escalations, and improve overall customer experience.",
+      "Created detailed process-efficiency dashboards for service job cards with automated daily emails, covering adherence, turnaround time, SLA compliance, and exception cases. This helped improve visibility into operational gaps and support faster decision-making.",
+      "Worked closely with Business, Data, and Cloud teams to understand requirements, document BRDs and SOPs, define workflows, and continuously optimise analytics and operational processes.",
+      "Built product analytics dashboards for the RE App and Wingman ride analytics. Covered user engagement, DAU/MAU, churn indicators, event-level insights, clicks and actions, as well as ride metrics like trips, crashes, route behaviour, and riding patterns. These insights supported product improvements and deeper behavioural understanding.",
+      "Assisted in data engineering activities using Databricks Python and SQL, including pipeline validation, anomaly checks, data leakage detection, and performance optimisation to ensure clean and reliable data flow into BI systems.",
+      "Contributed to product management for the Germany and UK Power Apps used for bike registration and warranty. Involved in requirement understanding, documentation, defining user flows, UI and UX discussions, research, API testing through Postman, integrating government and address APIs, and monitoring operational bottlenecks to improve the end-to-end onboarding experience.",
+      "Conducted extensive API research and evaluation, mapped system interactions, validated third-party integrations, and coordinated with backend teams to ensure smooth data sync between government systems and internal RE platforms.",
+      "Explored and initiated early adoption of Generative AI and AI agents within Power BI and Power Platform, using Copilot for automations, insight extraction, and faster reporting workflows."
+    ]
+  },
+  {
+    title: "Data Steward Intern",
+    company: "Customerinsights.ai",
+    duration: "April 2024 - June 2024",
+    location: "Hyderabad",
+    description: [
+      "Led a high-impact hospital clustering project, refining affiliations and naming conventions with fuzzy matching and custom Python scripts, achieving 99.99% accuracy.",
+      "Automated complex processes using Python, SQL, and Excel, while applying meticulous manual validation to ensure data integrity and eliminate inconsistencies.",
+      "Collaborated with Novartis stakeholders, aligning data structures with industry standards and delivering high-quality, business-critical insights."
+    ]
+  }
+];
 ---
 
 <Layout>
   <div class="container">
     <h1>POW</h1>
     
-    <div class="experience-item">
-      <h2>Junior Consultant</h2>
-      <div class="company-details">
-        <span class="company">Royal Enfield</span>
-        <span class="duration">August 2024 - Present</span>
-        <span class="location">Chennai, RE HeadQuarters</span>
-      </div>
-      <ul>
-        <li>Designed and optimized Power BI dashboards by transforming Excel-based reports into real-time, cloud-integrated solutions with SQL views and daily data streaming.</li>
-        <li>Developed advanced DAX calculations, RLS, and 25+ key business metrics, covering cost adherence, time tracking, service efficiency, and soft product performance.</li>
-        <li>Reengineered and automated multiple service dashboards, enhancing decision-making, operational insights, and reporting accuracy.</li>
-        <li>Collaborated closely with business teams to understand requirements, streamlining analytics, data automation, and performance optimization across service operations.</li>
-      </ul>
-    </div>
-
-    <div class="experience-item">
-      <h2>Data Steward Intern</h2>
-      <div class="company-details">
-        <span class="company">Customerinsights.ai</span>
-        <span class="duration">April 2024 - June 2024</span>
-        <span class="location">Hyderabad</span>
-      </div>
-      <ul>
-        <li>Led a high-impact hospital clustering project, refining affiliations and naming conventions with fuzzy matching and custom Python scripts, achieving 99.99% accuracy.</li>
-        <li>Automated complex processes using Python, SQL, and Excel, while applying meticulous manual validation to ensure data integrity and eliminate inconsistencies.</li>
-        <li>Collaborated with Novartis stakeholders, aligning data structures with industry standards and delivering high-quality, business-critical insights.</li>
-      </ul>
+    <div class="projects-grid">
+      {projects.map(project => (
+        <ProjectCard {...project} />
+      ))}
     </div>
   </div>
 </Layout>
 
 <style>
   .container {
-    margin: 2rem auto;
-    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
   }
 
   h1 {
-    font-size: clamp(2.5rem, 8vw, 4rem);
-    margin: 0 0 3rem 0;
-    line-height: 1.1;
-    letter-spacing: -0.04em;
-    max-width: 15ch; /* Consider if this is too restrictive, but okay for now */
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    color: var(--text-primary);
   }
 
-  .experience-item {
-    margin-bottom: 3.5rem; /* Slightly increased for better separation */
-  }
-
-  h2 {
-    font-size: clamp(1.4rem, 3.5vw, 1.7rem);
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 0.6rem; /* Adjusted for slightly less space above company details */
-    position: relative;
-    padding-left: 1.2em;
-    line-height: 1.4;
-  }
-
-  h2::before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.1em; /* Slightly larger bullet if desired, or keep as is */
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  .company-details {
+  .projects-grid {
     display: flex;
-    gap: 0.75rem; /* Adjusted gap */
-    flex-wrap: wrap;
-    align-items: baseline; /* Align items nicely on one line */
-    margin-bottom: 1rem;
-    margin-left: 1.2em; /* Indent to align with h2 text, not bullet */
-    font-size: clamp(0.95rem, 2.5vw, 1rem); /* Responsive font size */
-    color: rgba(255, 255, 255, 0.7);
-  }
-
-  .company-details .company {
-    font-weight: 600; /* Bolder company name */
-    color: rgba(255, 255, 255, 0.85); /* Slightly brighter */
-  }
-
-  .company-details .duration::before,
-  .company-details .location::before {
-    content: "|";
-    margin-right: 0.75rem;
-    margin-left: 0.05rem; /* To give a tiny space from the word if it wraps */
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  ul {
-    list-style-type: disc;
-    padding-left: 2.5em;
-    margin-top: 1.5rem;
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  li {
-    margin-bottom: 0.6rem;
-    line-height: 1.5;
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  @media (max-width: 600px) {
-    .company-details {
-      flex-direction: column;
-      gap: 0.4rem; /* Increased gap for stacked items */
-      margin-left: 0; /* Remove indent when stacked, align with section title */
-      padding-left: 1.2em; /* If you want to keep some indent for the text block */
-    }
-    .company-details .duration::before,
-    .company-details .location::before {
-        content: "";
-        margin: 0;
-    }
-
-    h1 {
-        font-size: clamp(2rem, 7vw, 2.5rem); /* Adjusted clamp for mobile H1 */
-        margin-bottom: 2rem;
-    }
-    h2 {
-        font-size: clamp(1.3rem, 4vw, 1.5rem); /* Adjusted clamp for mobile H2 */
-        padding-left: 1.1em;
-        margin-bottom: 0.75rem;
-    }
-     h2::before {
-        font-size: 1em; /* Adjust bullet size if needed for mobile */
-     }
-    ul {
-      padding-left: 1.5em; /* Reduced padding for mobile lists */
-      margin-top: 1rem;
-      margin-left: 0; /* Remove indent when stacked, align with section title */
-    }
-    li {
-       font-size: clamp(0.9rem, 2.8vw, 1rem); /* Responsive font size for list items */
-       line-height: 1.6; /* Improve readability */
-    }
+    flex-direction: column;
+    gap: 1rem;
   }
 </style>

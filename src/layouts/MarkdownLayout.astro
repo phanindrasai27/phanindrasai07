@@ -1,0 +1,151 @@
+---
+import Layout from './Layout.astro';
+
+const { frontmatter } = Astro.props;
+---
+
+<Layout>
+  <article class="post-container">
+    <div class="post-box">
+      <header>
+        <h1>{frontmatter.title}</h1>
+        <div class="meta">
+          <time datetime={frontmatter.pubDate.toISOString()}>
+            {frontmatter.pubDate.toLocaleDateString('en-us', {
+              year: 'numeric',
+              month: 'short',
+              day: 'numeric',
+            })}
+          </time>
+        </div>
+      </header>
+      <div class="content">
+        <slot />
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .post-container {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .post-box {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2rem;
+    margin: 2rem 0;
+  }
+
+  header {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .meta {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  .content {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    font-size: 1rem;
+  }
+
+  /* Markdown Content Styles */
+  .content :global(h2) {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .content :global(h3) {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .content :global(a) {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .content :global(a:hover) {
+    opacity: 0.8;
+  }
+
+  .content :global(ul), .content :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .content :global(code) {
+    background: var(--code-bg);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+    font-family: monospace;
+    color: var(--text-primary);
+  }
+
+  .content :global(pre) {
+    background: var(--code-block-bg);
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+  }
+
+  .content :global(pre code) {
+    background: none;
+    padding: 0;
+  }
+  
+  .content :global(blockquote) {
+    border-left: 3px solid var(--border-subtle);
+    margin: 0 0 1.5rem 0;
+    padding-left: 1rem;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* Image Styling */
+  .content :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin: 2rem 0;
+    display: block;
+  }
+
+  /* Center images by default */
+  .content :global(p img) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+</style>

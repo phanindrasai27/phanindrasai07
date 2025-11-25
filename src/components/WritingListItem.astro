@@ -1,0 +1,60 @@
+---
+interface Props {
+  title: string;
+  url: string;
+  displayDate: string;
+}
+
+const { title, url, displayDate } = Astro.props;
+---
+
+<a href={url} class="writing-item">
+  <span class="date">{displayDate}</span>
+  <span class="title">{title}</span>
+</a>
+
+<style>
+  .writing-item {
+    display: flex;
+    align-items: baseline;
+    text-decoration: none;
+    padding: 0.25rem 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .writing-item:hover {
+    opacity: 0.8;
+  }
+
+  .date {
+    flex-shrink: 0;
+    width: 8ch;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-family: 'Inter', sans-serif;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .title {
+    color: var(--text-primary);
+    line-height: 1.5;
+  }
+
+  .writing-item:hover .title {
+    text-decoration: underline;
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 600px) {
+    .writing-item {
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .date {
+      width: auto;
+      font-size: 0.8rem;
+      margin-bottom: 0.1rem;
+    }
+  }
+</style>

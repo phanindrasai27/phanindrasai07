@@ -1,130 +1,50 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import WritingListItem from '../components/WritingListItem.astro';
+import { getCollection } from 'astro:content';
 
-const writingsData = [
-  { title: "Building Products That Make People Addicted to Your Magic and Journey with Your Product", url: "https://medium.com/@phanindra_sai27/building-products-that-make-people-addicted-to-your-magic-and-journey-with-your-product-afc115610bfb", displayDate: "Jan 2024" },
-  { title: "Designing YouTube for Senior Citizens: A Case Study", url: "https://medium.com/@phanindra_sai27/designing-youtube-for-senior-citizens-a-case-study-40550823d1ac", displayDate: "Mar 2024" },
-  { title: "How Eatsure is Surviving in the Cutthroat Food Delivery Market with its Own Playbook", url: "https://medium.com/@phanindra_sai27/how-eatsure-is-surviving-in-the-cutthroat-food-delivery-market-with-its-own-playbook-f7507e431901", displayDate: "Feb 2024" },
-  { title: "Living Forever: The Bryan Johnson Experiment", url: "https://medium.com/@phanindra_sai27/living-forever-the-bryan-johnson-experiment-7c68c87d64a7", displayDate: "Feb 2024" },
-  { title: "Not All Startups Are Created Equal: The Brutal Truth About What it Takes to Make an Impact", url: "https://medium.com/@phanindra_sai27/not-all-startups-are-created-equal-the-brutal-truth-about-what-it-takes-to-make-an-impact-cc316125a39c", displayDate: "Aug 2024" },
-  { title: "Notifications are Dead for Future Product Design: Notify App - A Case Study", url: "https://medium.com/@phanindra_sai27/notifications-are-dead-for-future-product-design-notify-app-a-case-study-fa66ab6f9c6d", displayDate: "Mar 2024" },
-  { title: "Product Improvement Case Study on Rapido", url: "https://medium.com/@phanindra_sai27/product-improvement-case-study-on-rapido-b92aa827c4c6", displayDate: "Mar 2024" },
-  { title: "The Choice Paradox in the Middle Class: A Trap of Endless Exploration", url: "https://medium.com/@phanindra_sai27/the-choice-paradox-in-the-middle-class-a-trap-of-endless-exploration-54f6dd46be75", displayDate: "Aug 2024" },
-  { title: "The Impact of System Design, Tech Stack and Tools on Workplace Productivity", url: "https://medium.com/@phanindra_sai27/the-impact-of-system-design-tech-stack-and-tools-on-workplace-productivity-98711db2524d", displayDate: "Feb 2024" },
-  { title: "When Life Feels Overwhelming: Letting Go of the Mental Weight", url: "https://medium.com/@phanindra_sai27/when-life-feels-overwhelming-letting-go-of-the-mental-weight-11f15e01204f", displayDate: "Jan 2024" },
-  { title: "The perfect way of learning Data science", url: "https://medium.com/@phanindra_sai27/the-perfect-way-of-learning-data-science-6fa64d75886f", displayDate: "Feb 2022" },
-  { title: "All about how to enter Full Stack AI and how to get Cracked at it. [My Guide]", url: "https://looper27.bearblog.dev/all-about-how-to-enter-full-stack-ai-and-how-to-get-cracked-at-it-my-guide/", displayDate: "May 2025" },
-  { title: "Philosophy Is Not for Everyone, It Might Kill Your Soul.", url: "https://looper27.bearblog.dev/philosophy-is-not-for-everyone-it-might-kill-your-soul/", displayDate: "May 2025" },
-  { title: "What is Tech Engineering in the era of AI", url: "https://looper27.bearblog.dev/what-is-tech-engineering-in-the-era-of-ai/", displayDate: "May 2025" },
-  { title: "Create Your Own Constraints in Life", url: "https://looper27.bearblog.dev/createyourownconstraintsinlife/", displayDate: "Apr 2025" },
-  { title: "Questions you should ask yourself before buying a Home!", url: "https://looper27.bearblog.dev/questions-you-should-ask-yourself-before-buying-a-new-home/", displayDate: "Apr 2025" },
-  { title: "The Ghibli Art Studio Vibe, Artists Got Hurt, Choice of Art, Digital AI at Fingertips, and Consumer Experience at Peaks", url: "https://looper27.bearblog.dev/the-ghibli-art-studio-vibe-artists-got-hurt-choice-of-art-digital-ai-at-fingertips-and-consumer-experience-at-peaks/", displayDate: "Mar 2025" },
-  { title: "Indian Real Estate is Overrated - Does Buying a Home is even right bet?", url: "https://looper27.bearblog.dev/indianrealestateisoverrated-doesbuyingahomeisevenrightbet/", displayDate: "Mar 2025" },
-  { title: "Quick Ecom, food delivery, ecosystem and In-App Credit", url: "https://looper27.bearblog.dev/quick-ecom-food-delivery-ecosystem-and-in-app-credit/", displayDate: "Mar 2025" },
-  { title: "Crypto, decentralization, blockchain and money.", url: "https://looper27.bearblog.dev/crypto-decentralization-blockchain-and-money/", displayDate: "Mar 2025" },
-  { title: "Why STEM, Medicine, and finance should be the majors of people", url: "https://looper27.bearblog.dev/why-stem-medicine-and-finance-should-be-the-majors-of-people/", displayDate: "Mar 2025" },
-  { title: "AGI, progress and assumptions of Dystopian futuristic world view.", url: "https://looper27.bearblog.dev/agi/", displayDate: "Mar 2025" },
-  { title: "The Illusion of Work: Why Big Companies Drag While Startups Build", url: "https://looper27.bearblog.dev/agi/", displayDate: "Mar 2025" },
-  { title: "Why quick ecommerce is much needed than food delivery and how it's helping the personalized lifestyle brands to grow and discovery.", url: "https://looper27.bearblog.dev/why-quick-ecommerce-is-much-needed-than-food-delivery-and-how-its-helping-the-personalized-lifestyle-brands-to-grow-and-discovery/", displayDate: "Mar 2025" },
-  { title: "Beyond Benchmarks: The Subtle Magic of Memorable Products", url: "https://looper27.bearblog.dev/beyond-benchmarks-the-subtle-magic-of-memorable-products/", displayDate: "Mar 2025" }
-];
+const allWritings = await getCollection('writings');
+const sortedWritings = allWritings.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-// Helper function to parse 'Mon YYYY' string to a Date object
-const parseDisplayDate = (displayDate) => {
-  const [monthStr, yearStr] = displayDate.split(' ');
-  const month = new Date(Date.parse(monthStr + " 1, " + yearStr)).getMonth();
-  return new Date(parseInt(yearStr), month, 1); // Day is set to 1, doesn't affect month/year sorting
+// Helper to format date for display
+const formatDate = (date) => {
+  return date.toLocaleDateString('en-us', { month: 'short', year: 'numeric' });
 };
-
-const writings = writingsData
-  .map(writing => ({
-    ...writing,
-    publishDate: parseDisplayDate(writing.displayDate)
-  }))
-  .sort((a, b) => b.publishDate.getTime() - a.publishDate.getTime());
-
 ---
 
 <Layout>
   <div class="container">
     <h1>Writings</h1>
     
-    <ul class="links">
-      {writings.map((writing) => (
-        <li>
-          <a href={writing.url} target="_blank" rel="noopener noreferrer">
-            <span class="writing-date">{writing.displayDate}</span>
-            <span class="writing-title">{writing.title}</span>
-          </a>
-        </li>
+    <div class="writings-list">
+      {sortedWritings.map((writing) => (
+        <WritingListItem 
+          title={writing.data.title}
+          url={`/writings/${writing.slug}`}
+          displayDate={formatDate(writing.data.pubDate)}
+        />
       ))}
-    </ul>
+    </div>
   </div>
 </Layout>
 
 <style>
   .container {
-    /* Removed margin: 0 auto; */
-    /* Ensure no other conflicting container styles */
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
   }
 
   h1 {
-    font-size: clamp(2.5rem, 8vw, 4rem); /* Match other h1s */
-    margin: 0 0 3rem 0; /* Match pow.astro h1 margin */
-    line-height: 1.1;
-    letter-spacing: -0.04em;
-    max-width: 15ch;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    color: var(--text-primary);
   }
 
-  .links {
+  .writings-list {
     display: flex;
     flex-direction: column;
-    gap: clamp(0.75rem, 1.5vh, 1rem); /* Reduced gap */
-    font-size: clamp(1.25rem, 3vw, 1.5rem);
-    margin-top: clamp(1rem, 3vh, 2rem);
-  }
-
-  .links li {
-    margin-bottom: 0.5em;
-    list-style-type: none; /* Ensure no default list bullet if not already set */
-  }
-
-  .links a {
-    color: rgba(255, 255, 255, 0.6);
-    text-decoration: none;
-    transition: all 0.3s ease;
-    transform-origin: 0 50%;
-    display: flex; /* Use flexbox for date and title alignment */
-    align-items: baseline; /* Align baseline of date and title */
-  }
-
-  .links a::before {
-    content: ""; /* Remove bullet by making content empty */
-  }
-
-  .links a:hover {
-    color: rgba(255, 255, 255, 0.9);
-  }
-  
-  .links a:hover::before {
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  .links a:active {
-    transform: scale(0.95);
-    transition: transform 0.1s ease;
-  }
-
-  .writing-date {
-    width: 7ch; /* Adjusted for 'Mon YYYY', e.g., 'Jan 2024' */
-    margin-right: 1.5em; /* Space between date and title */
-    color: rgba(255, 255, 255, 0.7); /* Slightly dimmer color for the date */
-    text-align: left; /* Align text to the left within its allocated space */
-    flex-shrink: 0; /* Prevent the date from shrinking if the title is long */
-    font-size: 0.9em; /* Make date font slightly smaller than title */
-  }
-
-  .writing-title {
-    flex-grow: 1; /* Allow title to take up remaining space */
+    gap: 0.75rem;
   }
 </style>

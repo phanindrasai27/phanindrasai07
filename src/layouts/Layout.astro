@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -12,91 +12,213 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script is:inline>
+      // Theme initialization - run immediately to prevent flash
+      const theme = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+    </script>
   </head>
   <body>
     <nav>
-      <a href="/">Home</a>
-      <a href="/writings">Writings</a>
-      <a href="/pow">POW</a>
+      <div class="nav-content">
+        <div class="nav-left">
+          <a href="/" class="home-link">Phanindra Sai</a>
+          <div class="nav-links">
+            <a href="/writings">Writings</a>
+            <a href="/pow">POW</a>
+          </div>
+        </div>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+          <span class="theme-icon">🌙</span>
+        </button>
+      </div>
     </nav>
     <main>
       <slot />
     </main>
+    
+    <script>
+      const themeToggle = document.getElementById('theme-toggle');
+      const themeIcon = themeToggle?.querySelector('.theme-icon');
+      const html = document.documentElement;
+      
+      function updateThemeIcon(theme: string) {
+        if (themeIcon) {
+          themeIcon.textContent = theme === 'dark' ? '🌙' : '☀️';
+        }
+      }
+      
+      // Set initial icon
+      const currentTheme = html.getAttribute('data-theme') || 'dark';
+      updateThemeIcon(currentTheme);
+      
+      themeToggle?.addEventListener('click', () => {
+        const current = html.getAttribute('data-theme') || 'dark';
+        const newTheme = current === 'dark' ? 'light' : 'dark';
+        
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+      });
+    </script>
   </body>
 </html>
 
 <style>
+  /* CSS Variables for theming */
+  html[data-theme="dark"] {
+    --bg-primary: #111;
+    --bg-secondary: #1a1a1a;
+    --text-primary: #e5e5e5;
+    --text-secondary: #d4d4d4;
+    --text-muted: #737373;
+    --border-color: #333;
+    --border-subtle: #404040;
+    --code-bg: #262626;
+    --code-block-bg: #171717;
+    --selection-bg: #333;
+  }
+
+  html[data-theme="light"] {
+    --bg-primary: #fff;
+    --bg-secondary: #f8f8f8;
+    --text-primary: #000;
+    --text-secondary: #1a1a1a;
+    --text-muted: #525252;
+    --border-color: #d0d0d0;
+    --border-subtle: #e0e0e0;
+    --code-bg: #f0f0f0;
+    --code-block-bg: #e8e8e8;
+    --selection-bg: #d4d4d4;
+  }
+
   html, body {
     margin: 0;
     padding: 0;
     width: 100%;
     min-height: 100vh;
-    font-family: 'Satoshi', sans-serif;
-    background: #000000;
-    color: rgba(255, 255, 255, 0.9);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
     line-height: 1.6;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  ::selection {
+    background: var(--selection-bg);
+    color: var(--text-primary);
   }
 
   nav {
-    position: fixed;
-    top: 0;
-    left: 0;
+    position: relative;
     width: 100%;
-    padding: clamp(1.5rem, 5vw, 2.5rem);
+    padding: 1.5rem 0;
     display: flex;
-    gap: clamp(2rem, 4vw, 3rem);
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    background: rgba(0, 0, 0, 0.95);
-    backdrop-filter: blur(10px);
-    z-index: 1000;
+    justify-content: center;
+    background: var(--bg-primary);
+  }
+
+  .nav-content {
+    width: 100%;
+    max-width: 640px;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
   }
 
   nav a {
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--text-primary);
     text-decoration: none;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    transform-origin: 50% 50%;
+    transition: text-decoration 0.2s ease;
   }
 
-  nav a:hover {
-    color: rgba(255, 255, 255, 0.9);
+  nav a:hover, nav a.active {
+    color: var(--text-primary);
+    text-decoration: underline;
+  }
+  
+  .home-link {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
   }
 
-  nav a:active {
-    transform: scale(0.95);
-    transition: transform 0.1s ease;
+  .theme-toggle {
+    background: transparent;
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--text-primary);
+    transform: scale(1.05);
+  }
+
+  .theme-icon {
+    display: block;
+    line-height: 1;
   }
 
   main {
     width: 100%;
-    max-width: min(90vw, 1200px);
+    max-width: 640px;
     margin: 0 auto;
-    padding: clamp(7rem, 15vw, 10rem) clamp(1rem, 5vw, 2rem) 2rem;
+    padding: 2rem 1.5rem 4rem;
+    animation: fadeIn 0.5s ease-out;
   }
 
-  @media (max-width: 768px) {
-    nav {
-      padding: 1.5rem;
-      font-size: 1.5rem;
-      gap: 2rem;
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 640px) {
+    .nav-content {
+      padding: 0 1rem;
     }
-  }
 
-  @media (max-width: 480px) {
-    nav {
-      padding: 1.25rem;
-      font-size: 1.25rem;
-      gap: 1.5rem;
+    .nav-left {
+      gap: 1rem;
+      font-size: 0.9rem;
     }
-  }
-
-  @media (min-width: 2000px) {
-    html {
-      font-size: 18px;
+    
+    .theme-toggle {
+      width: 36px;
+      height: 36px;
+      font-size: 1rem;
+    }
+    
+    main {
+      padding: 2rem 1rem 3rem;
     }
   }
 </style>
